@@ -1,31 +1,59 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../components/HomePage.vue'
+import Home from '../components/HomePage.vue'
+import LoginPage from '../views/Login.vue'
+import RegisterPage from '../views/Register.vue'
+import ForgotPassword from '../views/ForgotPassword.vue'
+import ProductCatalog from '../views/ProductCatalog.vue'
+import ShoppingCart from '../views/ShoppingCart.vue'
+import CheckoutPage from '../views/Checkout.vue'
+import OrderConfirmation from '../views/OrderConfirmation.vue'
+import TransactionHistoryPage from '../views/TransactionHistory.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomePage
+    component: Home
   },
   {
-    path: '/order',
-    name: 'Order',
-    component: () => import('../components/OrderPage.vue')
+    path: '/login',
+    name: 'Login',
+    component: LoginPage
   },
   {
-    path: '/blog',
-    name: 'Blog',
-    component: () => import('../components/BlogPage.vue')
+    path: '/register',
+    name: 'Register',
+    component: RegisterPage
   },
   {
-    path: '/pages',
-    name: 'Pages',
-    component: () => import('../components/PagesPage.vue')
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword
   },
   {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import('../components/ContactPage.vue')
+    path: '/products',
+    name: 'ProductCatalog',
+    component: ProductCatalog
+  },
+  {
+    path: '/cart',
+    name: 'ShoppingCart',
+    component: ShoppingCart
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: CheckoutPage
+  },
+  {
+    path: '/order-confirmation',
+    name: 'OrderConfirmation',
+    component: OrderConfirmation
+  },
+  {
+    path: '/transaction-history',
+    name: 'TransactionHistory',
+    component: TransactionHistoryPage
   }
 ]
 
@@ -35,3 +63,4 @@ const router = createRouter({
 })
 
 export default router
+

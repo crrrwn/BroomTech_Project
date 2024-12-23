@@ -32,12 +32,16 @@
                 1
               </span>
             </button>
-            <div class="flex items-center space-x-2">
+            <div v-if="isLoggedIn" class="flex items-center space-x-2">
               <div class="h-8 w-8 bg-green-600 rounded-full"></div>
               <div class="hidden md:block">
-                <div class="text-sm">Hi, Admin</div>
-                <div class="text-xs text-gray-400">My Account</div>
+                <div class="text-sm">Hi, {{ user.name }}</div>
+                <button @click="logout" class="text-xs text-gray-400 hover:text-white">Logout</button>
               </div>
+            </div>
+            <div v-else class="space-x-2">
+              <router-link to="/login" class="text-gray-300 hover:text-white transition-colors">Login</router-link>
+              <router-link to="/register" class="text-gray-300 hover:text-white transition-colors">Register</router-link>
             </div>
           </div>
 
@@ -59,33 +63,56 @@
           >
             {{ item.name }}
           </router-link>
+          <router-link to="/transaction-history" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Transaction History</router-link>
+          <router-link to="/products" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Products</router-link>
+          <div v-if="isLoggedIn">
+            <div class="px-3 py-2 text-gray-300">Hi, {{ user.name }}</div>
+            <button @click="logout" class="block w-full text-left px-3 py-2 text-gray-300 hover:text-white">Logout</button>
+          </div>
+          <div v-else>
+            <router-link to="/login" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Login</router-link>
+            <router-link to="/register" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Register</router-link>
+          </div>
         </div>
       </div>
     </nav>
 
-    <router-view></router-view>
+    <router-view class="pt-16"></router-view>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
   setup() {
+    const store = useStore()
+    const router = useRouter()
     const mobileMenuOpen = ref(false)
 
     const navigation = [
       { name: 'Home', href: '/' },
-      { name: 'Order', href: '/order' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Pages', href: '/pages' },
-      { name: 'Contact', href: '/contact' }
+      { name: 'Products', href: '/products' },
+      { name: 'Transaction History', href: '/transaction-history' }
     ]
+
+    const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
+    const user = computed(() => store.state.auth.user)
+
+    const logout = () => {
+      store.dispatch('auth/logout')
+      router.push('/')
+    }
 
     return {
       mobileMenuOpen,
-      navigation
+      navigation,
+      isLoggedIn,
+      user,
+      logout
     }
   }
 }
@@ -98,3 +125,4 @@ body {
   font-family: 'Inter', sans-serif;
 }
 </style>
+
