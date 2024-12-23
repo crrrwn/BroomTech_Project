@@ -1,47 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import ProductCatalog from '@/components/ProductCatalog.vue'
-import OrderManagement from '@/components/OrderManagement.vue'
-import DeliveryTracking from '@/components/DeliveryTracking.vue'
-import CustomerSupport from '@/components/CustomerSupport.vue'
-import AdminDashboard from '@/components/AdminDashboard.vue'
-import UserRegistration from '@/components/UserRegistration.vue'
+import HomePage from '../components/HomePage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: HomePage
   },
   {
-    path: '/products',
-    name: 'Products',
-    component: ProductCatalog
+    path: '/order',
+    name: 'Order',
+    component: () => import('../components/OrderPage.vue')
   },
   {
-    path: '/orders',
-    name: 'Orders',
-    component: OrderManagement
+    path: '/blog',
+    name: 'Blog',
+    component: () => import('../components/BlogPage.vue')
   },
   {
-    path: '/delivery-tracking',
-    name: 'DeliveryTracking',
-    component: DeliveryTracking
+    path: '/pages',
+    name: 'Pages',
+    component: () => import('../components/PagesPage.vue')
   },
   {
-    path: '/support',
-    name: 'CustomerSupport',
-    component: CustomerSupport
-  },
-  {
-    path: '/admin',
-    name: 'AdminDashboard',
-    component: AdminDashboard
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: UserRegistration
+    path: '/contact',
+    name: 'Contact',
+    component: () => import('../components/ContactPage.vue')
   }
 ]
 
@@ -51,4 +35,3 @@ const router = createRouter({
 })
 
 export default router
-
