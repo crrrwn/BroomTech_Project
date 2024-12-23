@@ -8,6 +8,7 @@ import ShoppingCart from '../views/ShoppingCart.vue'
 import CheckoutPage from '../views/Checkout.vue'
 import OrderConfirmation from '../views/OrderConfirmation.vue'
 import TransactionHistoryPage from '../views/TransactionHistory.vue'
+import HelpPage from '../views/Help.vue'
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/transaction-history',
     name: 'TransactionHistory',
     component: TransactionHistoryPage
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: HelpPage
   }
 ]
 

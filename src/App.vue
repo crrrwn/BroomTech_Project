@@ -63,21 +63,20 @@
           >
             {{ item.name }}
           </router-link>
-          <router-link to="/transaction-history" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Transaction History</router-link>
-          <router-link to="/products" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Products</router-link>
-          <div v-if="isLoggedIn">
-            <div class="px-3 py-2 text-gray-300">Hi, {{ user.name }}</div>
-            <button @click="logout" class="block w-full text-left px-3 py-2 text-gray-300 hover:text-white">Logout</button>
-          </div>
-          <div v-else>
-            <router-link to="/login" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Login</router-link>
-            <router-link to="/register" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Register</router-link>
-          </div>
+        </div>
+        <div v-if="isLoggedIn">
+          <div class="px-3 py-2 text-gray-300">Hi, {{ user.name }}</div>
+          <button @click="logout" class="block w-full text-left px-3 py-2 text-gray-300 hover:text-white">Logout</button>
+        </div>
+        <div v-else>
+          <router-link to="/login" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Login</router-link>
+          <router-link to="/register" class="block px-3 py-2 text-gray-300 hover:text-white" @click="mobileMenuOpen = false">Register</router-link>
         </div>
       </div>
     </nav>
 
     <router-view class="pt-16"></router-view>
+    <ChatSupport />
   </div>
 </template>
 
@@ -85,9 +84,13 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import ChatSupport from './components/ChatSupport.vue'
 
 export default {
   name: 'App',
+  components: {
+    ChatSupport
+  },
   setup() {
     const store = useStore()
     const router = useRouter()
@@ -96,7 +99,8 @@ export default {
     const navigation = [
       { name: 'Home', href: '/' },
       { name: 'Products', href: '/products' },
-      { name: 'Transaction History', href: '/transaction-history' }
+      { name: 'Transaction History', href: '/transaction-history' },
+      { name: 'Help', href: '/help' }
     ]
 
     const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
